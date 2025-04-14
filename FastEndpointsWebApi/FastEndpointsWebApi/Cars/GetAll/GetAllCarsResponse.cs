@@ -1,8 +1,8 @@
-using System;
+using FastEndpointsWebApi.Cars.Entities;
 
 namespace FastEndpointsWebApi.Cars.GetAll;
 
 public class GetAllCarsResponse
 {
-    public List<CarResponse> Cars { get; set; } = new List<CarResponse>();
+    public List<Car> Cars { get; set; } = [];
 }
