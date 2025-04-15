@@ -1,10 +1,17 @@
 using FastEndpoints;
 using FastEndpointsWebApi.Cars.Entities;
+using FastEndpointsWebApi.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace FastEndpointsWebApi.Cars.GetAll;
 
 public class GetAllCarsEndpoint : EndpointWithoutRequest<GetAllCarsResponse>
 {
+    public GetAllCarsEndpoint(AppDbContext dbContext)
+    {
+        DbContext = dbContext;
+    }
+    private readonly AppDbContext DbContext;
     public override void Configure()
     {
         Get("/cars");
@@ -16,14 +23,10 @@ public class GetAllCarsEndpoint : EndpointWithoutRequest<GetAllCarsResponse>
         // Simulate some async work
         await Task.Delay(1000, ct);
 
+        var cars = await DbContext.Cars.ToListAsync();
         GetAllCarsResponse carsResponse = new()
         {
-            Cars = new List<Car>
-            {
-                new() { Id = 1, Make = "Toyota", Model = "Camry", Year = 2020 },
-                new() { Id = 2, Make = "Honda", Model = "Civic", Year = 2019 },
-                new() { Id = 3, Make = "Ford", Model = "Mustang", Year = 2021 }
-            }
+            Cars = cars
         };
 
         await SendOkAsync(carsResponse, ct);
