@@ -9,7 +9,7 @@ public class Car
     public string Model { get; set; } = string.Empty;
     public int Year { get; set; }
     public string Color { get; set; } = string.Empty;
-    public string EngineType { get; set; } = string.Empty;
-    public string Transmission { get; set; } = string.Empty;
+    public EngineType EngineType { get; set; }
+    public Transmission Transmission { get; set; }
     public int Horsepower { get; set; }
 }
