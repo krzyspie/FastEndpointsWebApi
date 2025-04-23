@@ -10,7 +10,9 @@ public class AddCarValidator : Validator<AddCarRequest>
     {
         RuleFor(x => x.Make)
             .NotEmpty()
-            .WithMessage("Make is required.");
+            .WithMessage("Make is required.")
+            .Must(x => Enum.TryParse(typeof(CarMake), x, out _))
+            .WithMessage("Invalid Make value.");
 
         RuleFor(x => x.Model)
             .NotEmpty()

@@ -24,7 +24,7 @@ public class AddCarEndpoint : Endpoint<AddCarRequest, int>
     {
         var car = new Car
         {
-            Make = req.Make,
+            Make = Enum.Parse<CarMake>(req.Make),
             Model = req.Model,
             Year = req.Year
         };
